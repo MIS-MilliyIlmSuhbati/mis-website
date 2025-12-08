@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIS - Milliy Ilm Suhbati | UMID PARVOZI Jamoasi</title>
+    <style>
+        /* ASOSIY RANGLAR */
+        :root {
+            --logo-gold: #deb05a;
+            --bg-green: #228220;
+            --accent-blue: #1e3a8a;
+            --text-light: #ffffff;
+            --text-dark: #111827;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        /* UMUMIY STILLAR */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-green) 0%, #1a5c19 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* NAVIGATSIYA */
+        .navbar {
+            background: rgba(34, 130, 32, 0.95);
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--logo-gold);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--logo-gold), #f4c430);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .logo-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            color: var(--logo-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: var(--logo-gold);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: var(--logo-gold);
+            color: var(--text-dark);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(222, 176, 90, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--logo-gold), #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-tagline {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--logo-gold);
+            color: var(--text-dark);
+            border: 2px solid var(--logo-gold);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--logo-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(222, 176, 90, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--logo-gold);
+            border: 2px solid var(--logo-gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--logo-gold);
+            color: var(--text-dark);
+            transform: translateY(-3px);
+        }
+
+        /* SAHIFA KONTEYNER */
+        .page {
+            min-height: 100vh;
+            padding: 120px 5% 80px;
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .page-header h2 {
+            font-size: 3.5rem;
+            color: var(--logo-gold);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .page-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--logo-gold);
+            border-radius: 2px;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* KONTENT BOX */
+        .content-box {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* KARTALAR */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(222, 176, 90, 0.2);
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--logo-gold);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--logo-gold);
+        }
+
+        .card h3 {
+            color: var(--logo-gold);
+            margin-bottom: 1.2rem;
+            font-size: 1.6rem;
+        }
+
+        .card p {
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            opacity: 0.9;
+        }
+
+        .card li::before {
+            content: '•';
+            color: var(--logo-gold);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+
+        /* JAMOA KARTALARI */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(222, 176, 90, 0.2);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--logo-gold);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--logo-gold), #f4c430);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 3rem;
+            color: var(--bg-green);
+            font-weight: bold;
+        }
+
+        .team-card h4 {
+            color: var(--logo-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .member-role {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* TELEGRAM BANNER */
+        .telegram-banner {
+            background: linear-gradient(135deg, #0088cc, #229ed9);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 4rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 2px solid var(--logo-gold);
+        }
+
+        .telegram-banner h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .telegram-link {
+            display: inline-block;
+            background: white;
+            color: #0088cc;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .telegram-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4rem 5%;
+            text-align: center;
+            margin-top: 5rem;
+            border-top: 2px solid var(--logo-gold);
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--logo-gold), #f4c430);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--logo-gold);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .footer-links a:hover {
+            background: var(--logo-gold);
+            color: var(--text-dark);
+        }
+
+        .copyright {
+            opacity: 0.7;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* ANIMATSIYALAR */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3.5rem; }
+            .page-header h2 { font-size: 2.8rem; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 1rem; }
+            .nav-links { margin-top: 1rem; flex-wrap: wrap; justify-content: center; }
+            .hero { margin-top: 120px; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-tagline { font-size: 1.4rem; }
+            .page-header h2 { font-size: 2.2rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-tagline { font-size: 1.2rem; }
+            .page-header h2 { font-size: 1.8rem; }
+            .card { padding: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATSIYA -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="#home" class="logo">MIS</a>
+            <div>
+                <div class="logo-subtitle">Milliy Ilm Suhbati</div>
+                <div class="logo-subtitle">UMID PARVOZI Jamoasi</div>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active" onclick="showPage('home')">Bosh Sahifa</a>
+            <a href="#loyiha" class="nav-link" onclick="showPage('loyiha')">Loyiha Haqida</a>
+            <a href="#maqsad" class="nav-link" onclick="showPage('maqsad')">Maqsad va Qoidalar</a>
+            <a href="#format" class="nav-link" onclick="showPage('format')">Format</a>
+            <a href="#jamoa" class="nav-link" onclick="showPage('jamoa')">Jamoa</a>
+            <a href="#aloqa" class="nav-link" onclick="showPage('aloqa')">Aloqa</a>
+        </div>
+    </nav>
+
+    <!-- SAHIFALAR -->
+    <main>
+        <!-- 1. BOSH SAHIFA -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <div class="hero-bg"></div>
+                <div class="hero-content">
+                    <h1>MIS - Milliy Ilm Suhbati</h1>
+                    <div class="hero-tagline">
+                        Ilmning sof ko'rinishi • Fikr, mazmun va yuksalish
+                    </div>
+                    <div class="hero-description">
+                        O'zbek tilida dunyoni chuqur tahlil qilamiz, yurakdan gaplashamiz, birga hayratlanamiz. 
+                        Bu yerda faqat toza o'zbek tili, halol suhbat va yangi fikrlar yashaydi.
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="#loyiha" class="btn btn-primary" onclick="showPage('loyiha')">Loyiha Haqida</a>
+                        <a href="#jamoa" class="btn btn-secondary" onclick="showPage('jamoa')">Jamoani Tanishing</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. LOYIHA HAQIDA -->
+        <section id="loyiha" class="page">
+            <div class="content-box">
+                <div class="page-header">
+                    <h2>MIS Loyihasi Haqida</h2>
+                    <p>O'zbek tilida ilmiy suhbat madaniyatini yaratuvchi premium platforma</p>
+                </div>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">🎯</div>
+                        <h3>MIS nima?</h3>
+                        <p><strong>MIS - Milliy Ilm Suhbati</strong> - bu TED Talk formatida, lekin o'zbekcha va o'zbek milliy ruhidagi intellektual muhokama platformasi.</p>
+                        <p>Biz har hil mavzularni chuqur tahlil qilamiz va oddiy tushunarli tilda ommaga yetkazamiz.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🔥</div>
+                        <h3>Nega MIS?</h3>
+                        <p>Chunki biz o'zbek tilining qudratiga ishonamiz. Nega birovlar yaratgan TED Talk'larni ko'rib, o'z tilimizda ajoyib kontent yaratmaymiz?</p>
+                        <p>MIS - bu o'zbek tilida ilmiy suhbat madaniyatini yaratish harakati.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🎙️</div>
+                        <h3>Qanday Ishlaydi?</h3>
+                        <p>Har bir suhbat 20 daqiqa davom etadi. Mutaxassis mavzuni har tomonlama yoritadi, auditoriya bilan muloqot qiladi, savollar orqali fikr almashadi.</p>
+                        <p>Auditoriyani "ilm-fan shaydolari" deb ataymiz.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MAQSAD VA QOIDALAR -->
+        <section id="maqsad" class="page">
+            <div class="content-box">
+                <div class="page-header">
+                    <h2>Maqsad va Qoidalar</h2>
+                    <p>MIS platformasining asosiy prinsiplari va qoidalari</p>
+                </div>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">🎯</div>
+                        <h3>Asosiy Maqsad</h3>
+                        <p>Odamlarni dunyo haqida ko'proq o'rganishga undash va o'zbek tilida bilim olish imkoniyatini yaratish.</p>
+                        <p>Dunyoni tahlil qilishda o'zimizga o'xshagan odamlarning fikrini ham eshitib, xulosa chiqarish.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">📜</div>
+                        <h3>Qat'iy Qoidalar</h3>
+                        <ul>
+                            <li>18+ so'zlar ishlatilmaydi</li>
+                            <li>Shaxsni yomonlash yo'q</li>
+                            <li>15+ yosh chegarasi</li>
+                            <li>Ko'cha va sheva so'zlari man etiladi</li>
+                            <li>Xorijiy so'z ishlatilsa, tarjimasi aytiladi</li>
+                            <li>Jamoat qoidalariga qarshi mavzu yo'q</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">⚖️</div>
+                        <h3>Adabiyot va Madaniyat</h3>
+                        <p>Har bir nutqda:</p>
+                        <ul>
+                            <li>Auditoriyaga hurmat bilan murojaat</li>
+                            <li>Faktlarga asoslangan tahlil</li>
+                            <li>Subyektiv fikr alohida bildiriladi</li>
+                            <li>Jo'shqinlik va kayfiyat bilan</li>
+                            <li>Professional prezentatsiya</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. FORMAT VA TARKIB -->
+        <section id="format" class="page">
+            <div class="content-box">
+                <div class="page-header">
+                    <h2>Format va Tarkib</h2>
+                    <p>MIS suhbatlarining tuzilishi va mazmuni</p>
+                </div>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">⏱️</div>
+                        <h3>Davomiylik va Struktura</h3>
+                        <p><strong>20 daqiqa:</strong> Har bir nutq aniq 20 daqiqa davom etadi</p>
+                        <p><strong>1-2 mavzu:</strong> Bir suhbatda 1 yoki 2 ta mavzu yoritiladi</p>
+                        <p><strong>Auditoriya ishtiroki:</strong> Mavzu boshlanishidan oldin umumiy savol beriladi</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">📅</div>
+                        <h3>Dastur Jadvali</h3>
+                        <p><strong>Asosiy suhbatlar:</strong> Har oy 4 ta premium suhbat</p>
+                        <p><strong>Kichik ma'lumotlar:</strong> 3 kunda bir qiziqarli fakt yoki tahlil</p>
+                        <p><strong>Jonli efirlar:</strong> Oylik ochiq suhbatlar</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🎤</div>
+                        <h3>Nutq Boshlanishi</h3>
+                        <p>Har bir suhbat quyidagi ibora bilan boshlanadi:</p>
+                        <p><em>"Assalomu alaykum, ilm-fan shaydolari! Men [Ism Familiya]. Bugun men sizlar bilan mana shu mavzuni birga tahlil qilmoqchiman..."</em></p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">✨</div>
+                        <h3>Nutq Tugashi</h3>
+                        <p>Har bir suhbat quyidagi so'zlar bilan tugaydi:</p>
+                        <p><em>"Bu dunyo - Alloh yaratgan dunyoning har tomonlama qirralari ko'p. Bularni tahlil qilish va o'rganish bizga yordam beradi o'zbek tilimizda. Hech qachon unutmanglar - bir yuturamiz! Soğ' omon bo'ling, o'zingizni dunyongizni yarating. Xayr!"</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. UMID PARVOZI JAMOASI -->
+        <section id="jamoa" class="page">
+            <div class="content-box">
+                <div class="page-header">
+                    <h2>UMID PARVOZI Jamoasi</h2>
+                    <p>MIS loyihasini yaratgan ijodkor yoshlar</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="member-avatar">BJ</div>
+                        <h4>Bahodir Jo'rayev</h4>
+                        <div class="member-role">Loyiha Asoschisi & Strategik Rahbar</div>
+                        <p>MIS loyihasining asoschisi, umumiy strategiya va kontent siyosati</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="member-avatar">BN</div>
+                        <h4>Behruz Noraliyev</h4>
+                        <div class="member-role">Texnik Direktor & Dasturchi</div>
+                        <p>Platformaning texnik jihatlari, veb-sayt va texnologik yechimlar</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="member-avatar">AB</div>
+                        <h4>Asror Badalov</h4>
+                        <div class="member-role">Kontent Menejeri & Muharrir</div>
+                        <p>Mavzular tanlovi, mehmonlar va kontent sifatini nazorat qilish</p>
+                    </div>
+                </div>
+                
+                <!-- TELEGRAM BANNER -->
+                <div class="telegram-banner">
+                    <h3>📢 Bizning Telegram Kanalimiz</h3>
+                    <p>MIS loyihasining yangiliklari, suhbatlar va foydali materiallar</p>
+                    <a href="https://t.me/umidparvozi" target="_blank" class="telegram-link">
+                        @umidparvozi kanaliga qo'shiling
+                    </a>
+                    <p style="margin-top: 1rem; opacity: 0.9; font-size: 0.9rem;">
+                        UMID PARVOZI jamoasining rasmiy kanali
+                    </p>
+                </div>
+                
+                <div class="card" style="max-width: 800px; margin: 2rem auto;">
+                    <h3 style="text-align: center; color: var(--logo-gold);">Jamoa Falsafasi</h3>
+                    <p style="text-align: center; font-size: 1.1rem; margin-top: 1rem;">
+                        "Biz - UMID PARVOZI. O'zbek yoshlarining intellektual salohiyatini oshirish, 
+                        milliy tafakkurni rivojlantirish va o'zbek tilida dunyo darajasidagi kontent yaratish 
+                        uchun birlashgan jamoa. Bizning ishimiz - ilmdan, madaniyatdan va milliy g'ururdan iborat."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. ALOQA -->
+        <section id="aloqa" class="page">
+            <div class="content-box">
+                <div class="page-header">
+                    <h2>Biz bilan Aloqa</h2>
+                    <p>MIS platformasi bilan bog'lanish va hamkorlik uchun</p>
+                </div>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">📧</div>
+                        <h3>Elektron Pochta</h3>
+                        <p>mis.ilmsuhbati@gmail.com</p>
+                        <p>Loyiha haqida umumiy savollar va takliflar uchun</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🤝</div>
+                        <h3>Hamkorlik</h3>
+                        <p>Universitetlar, o'quv markazlari, media tashkilotlari bilan hamkorlikka ochiqmiz</p>
+                        <p>Nutq so'zlovchi sifatida ishtirok etish takliflari</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">💡</div>
+                        <h3>Mavzu Takliflari</h3>
+                        <p>Siz qanday mavzularda suhbat ko'rishni istaysiz?</p>
+                        <p>Auditoriyamizning fikri biz uchun muhim!</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🎯</div>
+                        <h3>Maqsadimiz</h3>
+                        <p>2025-yil oxirigacha:</p>
+                        <ul>
+                            <li>50+ premium suhbat</li>
+                            <li>10,000+ doimiy tomoshabin</li>
+                            <li>Xalqaro miqyosda tan olinish</li>
+                            <li>O'zbek tilida ilmiy kontent standartini o'rnatish</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">MIS</div>
+        <div class="footer-tagline">
+            Milliy Ilm Suhbati - O'zbek tilida ilmiy tafakkurni yuksaltirish harakati
+        </div>
+        
+        <div class="footer-links">
+            <a href="#home" onclick="showPage('home')">Bosh Sahifa</a>
+            <a href="#loyiha" onclick="showPage('loyiha')">Loyiha</a>
+            <a href="#jamoa" onclick="showPage('jamoa')">Jamoa</a>
+            <a href="#aloqa" onclick="showPage('aloqa')">Aloqa</a>
+            <a href="https://t.me/umidparvozi" target="_blank">Telegram</a>
+        </div>
+        
+        <div class="copyright">
+            © 2024 MIS - Milliy Ilm Suhbati. Barcha huquqlar himoyalangan.<br>
+            UMID PARVOZI Jamoasi tomonidan yaratilgan.
+        </div>
+    </footer>
+
+    <script>
+        // SAHIFALARNI ALMASHTIRISH
+        function showPage(pageId) {
+            // Barcha sahifalarni yashirish
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Barcha nav linklarni faolsizlashtirish
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Tanlangan sahifani ko'rsatish
+            document.getElementById(pageId).classList.add('active');
+            
+            // Tanlangan nav linkni faollashtirish
+            document.querySelector(`.nav-link[onclick="showPage('${pageId}')"]`).classList.add('active');
+            
+            // Scroll yuqoriga
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            return false;
+        }
+
+        // HASH CHANGE DA SAHIFA ALMASHTIRISH
+        window.addEventListener('hashchange', function() {
+            const pageId = window.location.hash.substring(1) || 'home';
+            showPage(pageId);
+        });
+
+        // SAYT YUKLANGANDA
+        document.addEventListener('DOMContentLoaded', function() {
+            const initialPage = window.location.hash.substring(1) || 'home';
+            showPage(initialPage);
+        });
+
+        // SMOOTH SCROLL FOR ANCHOR LINKS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    showPage(targetId);
+                    history.pushState(null, null, href);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
