@@ -610,81 +610,80 @@
 </head>
 <body>
     <!-- NAVBAR -->
-  <!-- NAVBAR (ESKI KODNI BU BILAN ALMASHTIRING) -->
-<nav class="navbar" id="navbar">
-    <div class="nav-container">
-        <!-- LOGO QISMI -->
+<!-- NAVBAR (BUTUN ESKI NAVBAR O'RNIGA QO'YING) -->
+<nav class="navbar" id="navbar" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid #c22822;
+">
+    <div class="nav-container" style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    ">
+        <!-- SIMPLE LOGO -->
         <a href="#home" class="logo-container" style="
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             text-decoration: none;
+            padding: 5px;
             transition: transform 0.3s ease;
         ">
-            <!-- LOGO RASMI -->
-            <div class="logo-img-wrapper" style="
-                position: relative;
-                width: 60px;
-                height: 60px;
-                transition: all 0.4s ease;
+            <!-- LOGO IMAGE -->
+            <div class="logo-image" style="
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 2px solid #deb05a;
+                transition: all 0.3s ease;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.2);
             ">
                 <img src="loyiha.jpg" 
                      alt="MIS Logo" 
-                     class="logo-img"
                      style="
                         width: 100%;
                         height: 100%;
-                        border-radius: 50%;
                         object-fit: cover;
-                        border: 3px solid #deb05a;
-                        box-shadow: 0 5px 15px rgba(222, 176, 90, 0.3);
-                        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                        cursor: pointer;
                      "
-                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#c22822,#deb05a);display:flex;align-items:center;justify-content:center;color:white;font-size:24px;font-weight:bold;border:3px solid #deb05a\">MIS</div>'">
-                
-                <!-- HOVER EFFECT UCHUN TO'LQIN -->
-                <div class="logo-wave" style="
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 50%;
-                    border: 2px solid transparent;
-                    animation: none;
-                    opacity: 0;
-                "></div>
+                     onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;background:linear-gradient(135deg,#c22822,#deb05a);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:18px;\">MIS</div>'">
             </div>
             
-            <!-- LOGO YOZUVLARI -->
+            <!-- LOGO TEXT -->
             <div class="logo-text" style="
                 display: flex;
                 flex-direction: column;
-                gap: 5px;
             ">
                 <div class="logo-main" style="
-                    font-size: 28px;
+                    font-size: 22px;
                     font-weight: 700;
                     color: #deb05a;
                     line-height: 1;
-                    letter-spacing: 1px;
-                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-                    transition: all 0.3s ease;
+                    letter-spacing: 0.5px;
                 ">MIS</div>
                 <div class="logo-sub" style="
-                    font-size: 12px;
+                    font-size: 10px;
                     color: #f8f9fa;
                     opacity: 0.8;
-                    letter-spacing: 2px;
+                    letter-spacing: 1.5px;
                     text-transform: uppercase;
-                    font-weight: 500;
-                    transition: all 0.3s ease;
+                    margin-top: 2px;
                 ">Milliy Ilm Suhbati</div>
             </div>
         </a>
         
-        <!-- MENU TOGGLE -->
+        <!-- MOBILE MENU BUTTON -->
         <button class="menu-btn" id="menuBtn" style="
             display: none;
             background: none;
@@ -692,7 +691,6 @@
             color: #f8f9fa;
             font-size: 24px;
             cursor: pointer;
-            transition: all 0.3s ease;
             padding: 5px;
         ">
             <i class="fas fa-bars"></i>
@@ -701,244 +699,228 @@
         <!-- NAVIGATION LINKS -->
         <ul class="nav-links" id="navLinks" style="
             display: flex;
-            gap: 30px;
+            gap: 25px;
             list-style: none;
             margin: 0;
             padding: 0;
         ">
-            <li><a href="#home" class="nav-link" style="
-                color: #f8f9fa;
+            <li><a href="#home" class="nav-link active" style="
+                color: #deb05a;
                 text-decoration: none;
                 font-weight: 500;
-                transition: all 0.3s ease;
-                position: relative;
-                padding: 10px 0;
                 font-size: 15px;
+                padding: 8px 0;
+                position: relative;
+                transition: color 0.3s ease;
             ">Bosh Sahifa</a></li>
             <li><a href="#about" class="nav-link" style="
                 color: #f8f9fa;
                 text-decoration: none;
                 font-weight: 500;
-                transition: all 0.3s ease;
-                position: relative;
-                padding: 10px 0;
                 font-size: 15px;
+                padding: 8px 0;
+                position: relative;
+                transition: color 0.3s ease;
             ">Loyiha</a></li>
             <li><a href="#team" class="nav-link" style="
                 color: #f8f9fa;
                 text-decoration: none;
                 font-weight: 500;
-                transition: all 0.3s ease;
-                position: relative;
-                padding: 10px 0;
                 font-size: 15px;
+                padding: 8px 0;
+                position: relative;
+                transition: color 0.3s ease;
             ">Jamoa</a></li>
             <li><a href="#events" class="nav-link" style="
                 color: #f8f9fa;
                 text-decoration: none;
                 font-weight: 500;
-                transition: all 0.3s ease;
-                position: relative;
-                padding: 10px 0;
                 font-size: 15px;
+                padding: 8px 0;
+                position: relative;
+                transition: color 0.3s ease;
             ">Tadbirlar</a></li>
             <li><a href="#contact" class="nav-link" style="
                 color: #f8f9fa;
                 text-decoration: none;
                 font-weight: 500;
-                transition: all 0.3s ease;
-                position: relative;
-                padding: 10px 0;
                 font-size: 15px;
+                padding: 8px 0;
+                position: relative;
+                transition: color 0.3s ease;
             ">Aloqa</a></li>
         </ul>
     </div>
 </nav>
 
+<!-- SIMPLE CSS FOR LOGO EFFECTS -->
 <style>
-/* LOGO HOVER ANIMATSIYALARI */
-@keyframes logoSpin {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(10deg) scale(1.1); }
-    100% { transform: rotate(0deg) scale(1); }
-}
-
-@keyframes logoPulse {
-    0% { transform: scale(1); box-shadow: 0 5px 15px rgba(222, 176, 90, 0.3); }
-    50% { transform: scale(1.05); box-shadow: 0 8px 25px rgba(194, 40, 34, 0.4); }
-    100% { transform: scale(1); box-shadow: 0 5px 15px rgba(222, 176, 90, 0.3); }
-}
-
-@keyframes logoWave {
-    0% { 
-        transform: scale(1); 
-        opacity: 1;
-        border-color: #deb05a;
-    }
-    50% { 
-        transform: scale(1.2); 
-        opacity: 0.5;
-        border-color: #c22822;
-    }
-    100% { 
-        transform: scale(1.4); 
-        opacity: 0;
-        border-color: transparent;
-    }
-}
-
-@keyframes logoShake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-    20%, 40%, 60%, 80% { transform: translateX(2px); }
-}
-
-@keyframes colorShift {
-    0% { border-color: #deb05a; }
-    50% { border-color: #c22822; }
-    100% { border-color: #deb05a; }
-}
-
-/* LOGO HOVER EFFECTLARI */
-.logo-container:hover .logo-img {
-    animation: logoPulse 0.8s ease, logoSpin 0.8s ease;
+/* SIMPLE HOVER EFFECTS */
+.logo-container:hover .logo-image {
+    transform: scale(1.05);
     border-color: #c22822;
-    box-shadow: 0 10px 30px rgba(194, 40, 34, 0.5);
-    transform: rotate(5deg) scale(1.05);
-}
-
-.logo-container:hover .logo-wave {
-    animation: logoWave 1s ease-out;
+    box-shadow: 0 5px 15px rgba(194, 40, 34, 0.3);
 }
 
 .logo-container:hover .logo-main {
     color: #c22822;
-    text-shadow: 0 0 10px rgba(194, 40, 34, 0.5);
-    transform: translateX(5px);
 }
 
-.logo-container:hover .logo-sub {
-    color: #deb05a;
-    opacity: 1;
-    letter-spacing: 3px;
-}
-
-.logo-container:active .logo-img {
-    animation: logoShake 0.5s ease;
+.logo-container:active .logo-image {
     transform: scale(0.95);
 }
 
-/* LOGO LOAD ANIMATSIYASI */
-.logo-img {
-    animation: colorShift 3s infinite;
+/* ACTIVE NAV LINK */
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #deb05a;
 }
 
-/* RESPONSIVE DESIGN */
+.nav-link:hover {
+    color: #deb05a !important;
+}
+
+/* SCROLL EFFECT FOR NAVBAR */
+.navbar.scrolled {
+    padding: 10px 0;
+    background: rgba(26, 26, 26, 0.98);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
-    .logo-img {
-        width: 50px !important;
-        height: 50px !important;
+    .menu-btn {
+        display: block !important;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(26, 26, 26, 0.98);
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .logo-image {
+        width: 40px !important;
+        height: 40px !important;
     }
     
     .logo-main {
-        font-size: 22px !important;
+        font-size: 20px !important;
     }
     
     .logo-sub {
-        font-size: 10px !important;
+        font-size: 9px !important;
         letter-spacing: 1px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text {
+        display: none !important;
+    }
+    
+    .logo-container {
+        gap: 0 !important;
     }
 }
 </style>
 
-<!-- JAVASCRIPT LOGO EFFECTLARI UCHUN -->
+<!-- MINIMAL JAVASCRIPT -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const logoContainer = document.querySelector('.logo-container');
-    const logoImg = document.querySelector('.logo-img');
-    const logoWave = document.querySelector('.logo-wave');
+    // MOBILE MENU TOGGLE
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
     
-    if (logoContainer && logoImg) {
-        // Mouse enter efekti
-        logoContainer.addEventListener('mouseenter', function() {
-            if (logoWave) {
-                logoWave.style.animation = 'logoWave 1s ease-out';
-                setTimeout(() => {
-                    logoWave.style.animation = 'none';
-                    logoWave.style.opacity = '0';
-                }, 1000);
-            }
-            
-            // Glow efekti
-            logoImg.style.filter = 'brightness(1.2) saturate(1.2)';
-            logoImg.style.boxShadow = '0 0 20px rgba(194, 40, 34, 0.6), 0 0 40px rgba(222, 176, 90, 0.4)';
-        });
-        
-        // Mouse leave efekti
-        logoContainer.addEventListener('mouseleave', function() {
-            logoImg.style.filter = 'brightness(1) saturate(1)';
-            logoImg.style.boxShadow = '0 5px 15px rgba(222, 176, 90, 0.3)';
-            logoImg.style.transform = 'rotate(0deg) scale(1)';
-        });
-        
-        // Click efekti
-        logoContainer.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Pulse efekti
-            logoImg.style.animation = 'logoPulse 0.3s ease';
-            setTimeout(() => {
-                logoImg.style.animation = '';
-            }, 300);
-            
-            // Scroll to top
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Agar logo yuklanmasa
-        logoImg.addEventListener('error', function() {
-            this.style.display = 'none';
-            const parent = this.parentElement;
-            parent.innerHTML = `
-                <div style="
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
-                    background: linear-gradient(135deg, #c22822, #deb05a);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                    font-size: 24px;
-                    font-weight: bold;
-                    border: 3px solid #deb05a;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                ">
-                    MIS
-                </div>
-            `;
-            
-            // Backup logoga ham hover efekti
-            const backupLogo = parent.querySelector('div');
-            if (backupLogo) {
-                backupLogo.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.1) rotate(5deg)';
-                    this.style.boxShadow = '0 10px 30px rgba(194, 40, 34, 0.5)';
-                });
-                
-                backupLogo.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1) rotate(0deg)';
-                    this.style.boxShadow = '0 5px 15px rgba(222, 176, 90, 0.3)';
-                });
-            }
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            menuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
         });
     }
+    
+    // NAVBAR SCROLL EFFECT
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+    
+    // SMOOTH SCROLL
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Close mobile menu
+                if (navLinks) navLinks.classList.remove('active');
+                if (menuBtn) menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 });
 </script>
+
+<!-- HERO SECTION KORREKTSIYASI (PAGE TEPASIDAGI HEADLINE) -->
+<!-- Agar hero sectionni ham soddalashtirmoqchi bo'lsangiz, bu koddan keyin qo'shing: -->
+<div style="margin-top: 80px; padding: 40px 20px; text-align: center; background: linear-gradient(135deg, #111111, #222222); color: white;">
+    <h1 style="
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+        color: #deb05a;
+        line-height: 1.2;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    ">MIS - Milliy Ilm Suhbati</h1>
+    <p style="
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto 30px;
+        opacity: 0.9;
+        line-height: 1.6;
+    ">Fikringni kengaytir - hayotingni o'zgartir</p>
+    <p style="
+        font-size: 1rem;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.8;
+        line-height: 1.5;
+    ">O'zbek tilida dunyoni chuqur tahlil qilamiz, yurakdan gaplashamiz, birga hayratlanamiz</p>
+</div>
 
     <!-- HERO SECTION -->
     <section id="home" class="hero">
