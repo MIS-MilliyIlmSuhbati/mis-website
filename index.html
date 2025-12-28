@@ -1,143 +1,191 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIS – Milliy Ilm Suhbati</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ================== RESET & BASIC ================== */
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+body { line-height:1.6; color:#333; background:#f7f7f7; }
+a { text-decoration:none; color:inherit; }
+img { max-width:100%; display:block; }
+section { padding:80px 20px; }
 
-    <title>MIS — Milliy Ilm Suhbati</title>
+/* ================== HEADER ================== */
+header { position:fixed; top:0; left:0; width:100%; background:rgba(255,255,255,0.95); z-index:1000; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:0.3s; }
+header .container { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:15px 20px; }
+header .logo img { width:60px; border-radius:50%; }
+header nav { display:flex; gap:20px; }
+header nav a { font-weight:500; transition:0.3s; }
+header nav a:hover { color:#007bff; }
 
-    <!-- SEO -->
-    <meta name="description" content="MIS — Milliy Ilm Suhbati. Ochiq fikr, chuqur tahlil va milliy intellektni rivojlantirishga qaratilgan platforma.">
-    <meta name="keywords" content="MIS, Milliy Ilm Suhbati, ilm, tafakkur, muhokama, intellektual loyiha">
-    <meta name="author" content="MIS Team">
+/* ================== HERO ================== */
+.hero { background:url('test2.jpg') center/cover no-repeat; min-height:90vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:white; position:relative; }
+.hero::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); }
+.hero-content { position:relative; z-index:1; max-width:800px; animation:fadeUp 1.5s ease forwards; }
+.hero-content h1 { font-size:3rem; margin-bottom:20px; }
+.hero-content p { font-size:1.2rem; margin-bottom:30px; }
+.hero-content a { background:#007bff; padding:12px 30px; color:white; border-radius:30px; font-weight:500; transition:0.3s; }
+.hero-content a:hover { background:#0056b3; transform:translateY(-3px); }
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
+/* ================== SECTION TITLES ================== */
+section h2 { text-align:center; margin-bottom:40px; font-size:2rem; color:#222; position:relative; }
+section h2::after { content:""; width:60px; height:3px; background:#007bff; display:block; margin:10px auto 0; border-radius:2px; }
 
+/* ================== ABOUT ================== */
+#about p { max-width:800px; margin:0 auto; font-size:1.1rem; line-height:1.8; animation:fadeIn 1s ease forwards; }
+
+/* ================== MAQSADLAR ================== */
+#goals { background:#e8f0fe; }
+.goals-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; max-width:1200px; margin:0 auto; }
+.goal { background:white; padding:30px; border-radius:15px; text-align:center; transition:0.3s; box-shadow:0 5px 15px rgba(0,0,0,0.1); animation:fadeUp 1s ease forwards; }
+.goal:hover { transform:translateY(-10px); box-shadow:0 10px 25px rgba(0,0,0,0.15); }
+.goal p { margin-top:15px; font-size:1rem; line-height:1.5; }
+
+/* ================== HAMKORLIK ================== */
+#partners { background:#fff; }
+.partners-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; max-width:1200px; margin:0 auto; }
+.partner { background:#e8f0fe; padding:25px; border-radius:15px; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.05); transition:0.3s; }
+.partner:hover { transform:scale(1.05); }
+
+/* ================== CONTACT ================== */
+#contact { background:#f1f1f1; }
+.contact-container { max-width:900px; margin:0 auto; background:white; padding:40px; border-radius:20px; box-shadow:0 10px 25px rgba(0,0,0,0.1); animation:fadeIn 1.5s ease forwards; }
+.contact-container h3 { text-align:center; margin-bottom:20px; }
+.contact-container iframe { width:100%; border:none; border-radius:15px; height:520px; }
+
+/* ================== TEAM ================== */
+#team { background:#e8f0fe; }
+.team-container { display:flex; justify-content:center; flex-wrap:wrap; gap:40px; max-width:1200px; margin:0 auto; }
+.team-member { background:white; padding:20px; border-radius:15px; text-align:center; width:250px; box-shadow:0 5px 15px rgba(0,0,0,0.1); transition:0.3s; }
+.team-member img { width:120px; border-radius:50%; margin-bottom:15px; }
+.team-member h4 { font-size:1.2rem; margin-bottom:5px; }
+.team-member p { font-size:0.9rem; color:#555; }
+
+/* ================== FOOTER ================== */
+footer { text-align:center; padding:30px 20px; background:#222; color:white; }
+
+/* ================== ANIMATIONS ================== */
+@keyframes fadeUp { 0% {opacity:0; transform:translateY(50px);} 100% {opacity:1; transform:translateY(0);} }
+@keyframes fadeIn { 0% {opacity:0;} 100% {opacity:1;} }
+
+/* ================== RESPONSIVE ================== */
+@media(max-width:768px){
+    header .container { flex-direction:column; gap:10px; }
+    .hero-content h1 { font-size:2rem; }
+    .hero-content p { font-size:1rem; }
+}
+</style>
 </head>
 <body>
 
-    <!-- ================= HEADER ================= -->
-    <header class="main-header">
-        <div class="container header-container">
+<!-- HEADER -->
+<header>
+<div class="container">
+    <div class="logo"><img src="loyiha.jpg" alt="MIS Logo"></div>
+    <nav>
+        <a href="#about">Loyiha</a>
+        <a href="#goals">Maqsadlar</a>
+        <a href="#partners">Hamkorlik</a>
+        <a href="#contact">Aloqa</a>
+        <a href="#team">Jamoa</a>
+    </nav>
+</div>
+</header>
 
-            <!-- Logo -->
-            <div class="logo-box">
-                <img src="images/logo.png" alt="MIS logo" class="logo">
-            </div>
+<!-- HERO -->
+<section class="hero" id="hero">
+<div class="hero-content">
+    <h1>MIS – Milliy Ilm Suhbati</h1>
+    <p>O‘zbekistonda ilm-fan va fikrlash madaniyatini rivojlantirishga qaratilgan milliy harakat</p>
+    <a href="#about">Batafsil</a>
+</div>
+</section>
 
-            <!-- Navigation -->
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#hero">Bosh sahifa</a></li>
-                    <li><a href="#about">Loyiha haqida</a></li>
-                    <li><a href="#goals">Maqsadlar</a></li>
-                    <li><a href="#partners">Hamkorlik</a></li>
-                    <li><a href="#team">Jamoa</a></li>
-                    <li><a href="#contact">Aloqa</a></li>
-                </ul>
-            </nav>
+<!-- ABOUT -->
+<section id="about">
+<h2>Loyiha haqida</h2>
+<p>MIS – Milliy Ilm Suhbati – bu ilm-fan va fikrlash madaniyatini rivojlantirishga qaratilgan milliy harakat. Loyihaning maqsadi yoshlarni ilmiy fikrlashga jalb qilish, innovatsion g‘oyalarni rivojlantirish va ularga platforma yaratishdir. Loyihaning bir nechta asosiy yo‘nalishlari mavjud: ilmiy suhbatlar, seminarlar, master-klasslar, telegram kanallar va media platformalar orqali bilim ulashish. MIS orqali yoshlar o‘z g‘oyalari va tajribalarini jamiyat bilan bo‘lishish imkoniga ega bo‘ladi.</p>
+</section>
 
-        </div>
-    </header>
+<!-- GOALS -->
+<section id="goals">
+<h2>Maqsadlarimiz 🎯</h2>
+<div class="goals-container">
+<div class="goal">
+<h3>Innovatsiya</h3>
+<p>Yoshlarning ilmiy va texnologik g‘oyalarini rivojlantirish</p>
+</div>
+<div class="goal">
+<h3>Hamkorlik</h3>
+<p>Universitetlar, korxonalar va tashkilotlar bilan kuchli aloqalarni yaratish</p>
+</div>
+<div class="goal">
+<h3>Bilim ulashish</h3>
+<p>Fikr almashish va seminarlar orqali yoshlarni rivojlantirish</p>
+</div>
+<div class="goal">
+<h3>Platforma yaratish</h3>
+<p>Yoshlar o‘z g‘oyalarini taqdim eta oladigan platforma</p>
+</div>
+</div>
+</section>
 
-    <!-- ================= HERO SECTION ================= -->
-    <section id="hero" class="hero-section">
-        <div class="hero-overlay"></div>
+<!-- PARTNERS -->
+<section id="partners">
+<h2>Hamkorlik 🤝</h2>
+<div class="partners-container">
+<div class="partner">
+<h3>Universitetlar</h3>
+<p>Oliy ta’lim muassasalari bilan ilmiy hamkorlik</p>
+</div>
+<div class="partner">
+<h3>Korporatsiyalar</h3>
+<p>Texnologiya va innovatsiya sohasidagi kompaniyalar bilan sheriklik</p>
+</div>
+<div class="partner">
+<h3>Jamiyat</h3>
+<p>Yoshlar bilan ijtimoiy va madaniy loyihalarda birgalik</p>
+</div>
+</div>
+</section>
 
-        <div class="hero-content">
-            <h1 class="hero-title">
-                Milliy fikr. <br>
-                Chuqur tahlil. <br>
-                Haqiqiy suhbat.
-            </h1>
+<!-- CONTACT -->
+<section id="contact">
+<h2>Aloqa 📩</h2>
+<div class="contact-container">
+<h3>Xabar yuboring</h3>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScx_nMDO4PpanTSl_6iKgJen9pHiAk5J20-ZcJTOkri4BamuA/viewform?embedded=true"></iframe>
+</div>
+</section>
 
-            <p class="hero-subtitle">
-                MIS — bu shunchaki loyiha emas.  
-                Bu — fikrlash madaniyatini o‘zgartirishga qaratilgan intellektual harakat.
-            </p>
-        </div>
-    </section>
+<!-- TEAM -->
+<section id="team">
+<h2>Jamoamiz 👥</h2>
+<div class="team-container">
+<div class="team-member">
+<img src="loyiha.jpg" alt="Team member">
+<h4>No‘malum shaxs</h4>
+<p>Galstuk bilan</p>
+</div>
+</div>
+</section>
 
-    <!-- ================= ABOUT ================= -->
-    <section id="about" class="section about-section">
-        <div class="container">
-            <h2 class="section-title">Loyiha haqida</h2>
+<!-- FOOTER -->
+<footer>
+<p>© 2025 MIS – Milliy Ilm Suhbati. Barcha huquqlar himoyalangan.</p>
+</footer>
 
-            <p class="section-text">
-                MIS (Milliy Ilm Suhbati) — bu ochiq muloqot, erkin fikr va chuqur tahlilga
-                asoslangan intellektual platforma. Loyiha jamiyatda ilmga,
-                mantiqqa va mas’uliyatli fikrlashga bo‘lgan munosabatni
-                rivojlantirishni maqsad qilgan.
-            </p>
-
-            <p class="section-text">
-                MIS an’anaviy nutqlardan farqli ravishda, tirik suhbat,
-                savol-javob va real fikrlar to‘qnashuviga asoslanadi.
-                Bu yerda tayyor shiorlar emas, balki fikrlar sinovdan o‘tadi.
-            </p>
-        </div>
-    </section>
-
-    <!-- ================= GOALS ================= -->
-    <section id="goals" class="section goals-section">
-        <div class="container">
-            <h2 class="section-title">Bizning maqsadlarimiz</h2>
-
-            <div class="goals-grid">
-                <div class="goal-card">📌 Tanqidiy fikrlashni rivojlantirish</div>
-                <div class="goal-card">📚 Ilmiy savodxonlikni oshirish</div>
-                <div class="goal-card">🧠 Milliy intellektual muhit yaratish</div>
-                <div class="goal-card">🤝 Ochiq va madaniyatli munozara</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= PARTNERS ================= -->
-    <section id="partners" class="section partners-section">
-        <div class="container">
-            <h2 class="section-title">Hamkorlik</h2>
-
-            <p class="section-text">
-                MIS ilmiy markazlar, ta’lim muassasalari va mustaqil
-                intellektual platformalar bilan hamkorlikka ochiq.
-            </p>
-        </div>
-    </section>
-
-    <!-- ================= TEAM ================= -->
-    <section id="team" class="section team-section">
-        <div class="container">
-            <h2 class="section-title">Jamoa</h2>
-
-            <div class="team-card">
-                <img src="https://via.placeholder.com/180x220" alt="Team member">
-                <h3>Noma’lum ishtirokchi</h3>
-                <p>Ilmiy suhbatlar moderatori</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= CONTACT ================= -->
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <h2 class="section-title">Bog‘lanish</h2>
-
-            <div class="contact-box">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScx_nMDO4PpanTSl_6iKgJen9pHiAk5J20-ZcJTOkri4BamuA/viewform?embedded=true"
-                        width="100%" height="600" frameborder="0">
-                </iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= FOOTER ================= -->
-    <footer class="main-footer">
-        <p>© 2025 MIS — Milliy Ilm Suhbati</p>
-    </footer>
-
-    <!-- JS -->
-    <script src="js/main.js"></script>
-
+<script>
+// Smooth scroll nav
+document.querySelectorAll('header nav a').forEach(link=>{
+    link.addEventListener('click',e=>{
+        e.preventDefault();
+        document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+    });
+});
+</script>
 </body>
 </html>
