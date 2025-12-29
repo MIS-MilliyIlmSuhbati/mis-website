@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>MIS — Milliy Ilm Suhbati</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -26,8 +26,7 @@ body{
   background:#0b0b0b;
   color:#eee;
   overflow-x:hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  min-height:100vh;
 }
 
 /* ================= HEADER ================= */
@@ -37,26 +36,17 @@ header{
   left:0;
   width:100%;
   height:70px;
-  background:rgba(10,10,10,.97);
-  backdrop-filter: blur(15px) saturate(180%);
+  background:rgba(10,10,10,.95);
+  backdrop-filter: blur(12px);
   display:flex;
   align-items:center;
-  justify-content:space-between;
   padding:0 6%;
-  z-index:1000;
+  z-index:9999;
   border-bottom:1px solid rgba(194,40,34,0.3);
-  box-shadow:0 5px 20px rgba(0,0,0,0.3);
+  transition:all 0.3s ease;
 }
 
-.header-container{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  width:100%;
-  max-width:1400px;
-  margin:0 auto;
-}
-
+/* LOGO ANIMATSIYASI - 45 gradus burilish va joyiga qaytish */
 .logo{
   width:52px;
   height:52px;
@@ -67,7 +57,7 @@ header{
   position:relative;
   cursor:pointer;
   box-shadow:0 0 0 rgba(194,40,34,0);
-  flex-shrink:0;
+  transform-origin:center;
 }
 
 .logo img{
@@ -75,12 +65,27 @@ header{
   height:100%;
   object-fit:cover;
   transition:transform 0.6s ease;
-  display:block;
 }
 
+/* Logo hover effekti: 45 gradusga buriladi va keyin joyiga qaytadi */
 .logo:hover{
-  transform:rotate(45deg) scale(1.1);
+  animation:logoRotate 1.2s ease-in-out forwards;
   box-shadow:0 0 25px var(--main);
+}
+
+@keyframes logoRotate {
+  0% {
+    transform:rotate(0deg) scale(1);
+  }
+  30% {
+    transform:rotate(45deg) scale(1.1);
+  }
+  70% {
+    transform:rotate(45deg) scale(1.1);
+  }
+  100% {
+    transform:rotate(0deg) scale(1);
+  }
 }
 
 .logo:hover::after{
@@ -101,15 +106,12 @@ header{
   100%{box-shadow:0 0 10px var(--main) inset;}
 }
 
-.logo:hover img{
-  transform:rotate(-45deg);
-}
-
-/* ================= NAVIGATION ================= */
+/* NAVIGATSIYA */
 nav{
+  margin-left:auto;
   display:flex;
   gap:28px;
-  margin-left:auto;
+  align-items:center;
 }
 
 nav a{
@@ -118,10 +120,9 @@ nav a{
   font-size:15px;
   letter-spacing:1px;
   position:relative;
-  padding:8px 0;
+  padding:5px 0;
   font-weight:500;
   white-space:nowrap;
-  transition:all 0.3s ease;
 }
 
 nav a::after{
@@ -135,42 +136,27 @@ nav a::after{
   transition:.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-nav a:hover{
-  color:white;
-}
-
 nav a:hover::after{
   width:100%;
 }
 
-/* Mobile menu button */
-.menu-toggle{
+.mobile-menu-btn{
   display:none;
-  flex-direction:column;
-  justify-content:space-between;
-  width:30px;
-  height:22px;
-  background:transparent;
+  background:none;
   border:none;
+  color:#fff;
+  font-size:24px;
   cursor:pointer;
-  padding:0;
-  z-index:1001;
 }
 
-.menu-toggle span{
-  width:100%;
-  height:3px;
-  background-color:var(--main);
-  border-radius:3px;
-  transition:all 0.3s ease;
-}
-
-/* ================= HERO ================= */
+/* ================= HERO BOSH SAHIFA ================= */
 .hero{
   min-height:100vh;
+  min-height:calc(100vh - 70px);
+  margin-top:70px;
   background:
-    linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
-    url('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80') center/cover no-repeat fixed;
+    linear-gradient(to bottom, rgba(0,0,0,.75), rgba(0,0,0,.92)),
+    url('test2.jpg') center/cover no-repeat fixed;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -179,6 +165,7 @@ nav a:hover::after{
   overflow:hidden;
 }
 
+/* Orqa fon rasmi sifatini saqlash */
 .hero::before{
   content:'';
   position:absolute;
@@ -188,6 +175,25 @@ nav a:hover::after{
   bottom:0;
   background:radial-gradient(circle at 20% 50%, rgba(194,40,34,0.15) 0%, transparent 50%),
              radial-gradient(circle at 80% 20%, rgba(222,176,90,0.1) 0%, transparent 50%);
+  pointer-events:none;
+}
+
+/* Rasmingizni hamma qurilmalarda sifatli ko'rinishi uchun */
+@media (max-width: 768px) {
+  .hero{
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,.8), rgba(0,0,0,.95)),
+      url('test2.jpg') center/cover no-repeat fixed;
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero{
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.98)),
+      url('test2.jpg') center/cover no-repeat;
+  }
 }
 
 .hero-content{
@@ -196,6 +202,7 @@ nav a:hover::after{
   z-index:2;
   animation:fadeInUp 1s ease-out;
   text-align:center;
+  width:100%;
 }
 
 @keyframes fadeInUp{
@@ -204,11 +211,11 @@ nav a:hover::after{
 }
 
 .hero h1{
-  font-size:clamp(38px, 7vw, 72px);
+  font-size:clamp(36px, 6vw, 72px);
   font-weight:800;
   line-height:1.1;
   margin-bottom:25px;
-  text-shadow:2px 2px 8px rgba(0,0,0,0.5);
+  text-shadow:2px 2px 10px rgba(0,0,0,0.7);
 }
 
 .hero h1 span{
@@ -220,10 +227,10 @@ nav a:hover::after{
 .hero h1 span::after{
   content:'';
   position:absolute;
-  bottom:-5px;
+  bottom:-8px;
   left:0;
   width:100%;
-  height:3px;
+  height:4px;
   background:var(--main);
   transform:scaleX(0);
   transform-origin:left;
@@ -235,28 +242,29 @@ nav a:hover::after{
 }
 
 .hero p{
-  margin:30px auto 45px;
-  font-size:clamp(17px, 2.5vw, 22px);
-  opacity:.92;
+  margin:30px 0 50px;
+  font-size:clamp(18px, 2.5vw, 24px);
+  opacity:.95;
   line-height:1.7;
-  max-width:700px;
+  padding:0 20px;
+  font-weight:300;
 }
 
 .hero a{
-  padding:18px 42px;
+  padding:18px 45px;
   border:2px solid var(--main);
   color:#fff;
   text-decoration:none;
   letter-spacing:1.2px;
   font-weight:600;
+  font-size:clamp(16px, 1.8vw, 18px);
   transition:all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   display:inline-block;
   position:relative;
   overflow:hidden;
   z-index:1;
-  background:rgba(194,40,34,0.1);
-  border-radius:4px;
-  font-size:17px;
+  background:rgba(194,40,34,0.15);
+  border-radius:5px;
 }
 
 .hero a::before{
@@ -272,8 +280,8 @@ nav a:hover::after{
 
 .hero a:hover{
   background:var(--main);
-  box-shadow:0 0 30px rgba(194,40,34,0.7);
-  transform:translateY(-5px);
+  box-shadow:0 0 40px rgba(194,40,34,0.8);
+  transform:translateY(-5px) scale(1.05);
 }
 
 .hero a:hover::before{
@@ -298,7 +306,7 @@ section{
 }
 
 .section-title h2{
-  font-size:clamp(30px, 4.5vw, 46px);
+  font-size:clamp(32px, 4.5vw, 48px);
   font-weight:700;
   display:inline-block;
   padding-bottom:15px;
@@ -315,7 +323,7 @@ section{
   bottom:-10px;
   left:50%;
   transform:translateX(-50%);
-  width:80px;
+  width:100px;
   height:4px;
   background:var(--main);
   border-radius:2px;
@@ -324,9 +332,9 @@ section{
 /* ================= ABOUT ================= */
 .about{
   max-width:1200px;
-  margin:auto;
+  margin:0 auto;
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
   gap:40px;
 }
 
@@ -364,7 +372,7 @@ section{
 .about h3{
   color:var(--gold);
   margin-bottom:18px;
-  font-size:22px;
+  font-size:clamp(20px, 2.5vw, 24px);
   display:flex;
   align-items:center;
   gap:10px;
@@ -373,7 +381,7 @@ section{
 .about p{
   line-height:1.7;
   opacity:.9;
-  font-size:16px;
+  font-size:clamp(16px, 1.8vw, 18px);
 }
 
 /* ================= FORMAT ================= */
@@ -389,7 +397,7 @@ section{
 .format-details h3{
   color:var(--gold);
   margin:25px 0 15px;
-  font-size:20px;
+  font-size:clamp(20px, 2.2vw, 22px);
   border-left:4px solid var(--main);
   padding-left:15px;
 }
@@ -405,6 +413,7 @@ section{
   display:flex;
   align-items:flex-start;
   gap:15px;
+  font-size:clamp(16px, 1.8vw, 18px);
 }
 
 .format-details li::before{
@@ -418,19 +427,19 @@ section{
   line-height:1.7;
   margin:15px 0;
   opacity:.9;
-  font-size:16px;
+  font-size:clamp(16px, 1.8vw, 18px);
 }
 
 /* ================= GOALS ================= */
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:30px;
 }
 
 .card{
   background:rgba(30,30,30,0.7);
-  padding:32px;
+  padding:clamp(25px, 3vw, 32px);
   border:1px solid rgba(255,255,255,0.08);
   border-radius:12px;
   transition:all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -464,7 +473,7 @@ section{
 .card h4{
   color:var(--gold);
   margin-bottom:15px;
-  font-size:20px;
+  font-size:clamp(20px, 2.2vw, 22px);
   display:flex;
   align-items:center;
   gap:12px;
@@ -473,7 +482,7 @@ section{
 .card p{
   line-height:1.7;
   opacity:.9;
-  font-size:16px;
+  font-size:clamp(16px, 1.8vw, 18px);
 }
 
 /* ================= TEAM ================= */
@@ -487,7 +496,7 @@ section{
 .member{
   background:rgba(30,30,30,0.7);
   padding:30px;
-  width:300px;
+  width:clamp(280px, 30vw, 320px);
   text-align:center;
   border:1px solid rgba(255,255,255,0.08);
   border-radius:15px;
@@ -501,8 +510,8 @@ section{
 }
 
 .member img{
-  width:140px;
-  height:140px;
+  width:clamp(120px, 15vw, 140px);
+  height:clamp(120px, 15vw, 140px);
   object-fit:cover;
   border-radius:50%;
   margin-bottom:20px;
@@ -518,12 +527,12 @@ section{
 .member h4{
   color:var(--gold);
   margin:10px 0 5px;
-  font-size:22px;
+  font-size:clamp(20px, 2.2vw, 24px);
 }
 
 .member p{
   color:#aaa;
-  font-size:14px;
+  font-size:clamp(14px, 1.6vw, 16px);
 }
 
 /* ================= EVENTS ================= */
@@ -534,7 +543,7 @@ section{
 
 .events-container{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
   gap:30px;
   margin-top:40px;
 }
@@ -561,7 +570,7 @@ section{
 }
 
 .event-header h4{
-  font-size:20px;
+  font-size:clamp(18px, 2vw, 22px);
   margin:0;
 }
 
@@ -573,7 +582,7 @@ section{
   line-height:1.7;
   margin:15px 0;
   opacity:.9;
-  font-size:16px;
+  font-size:clamp(16px, 1.8vw, 18px);
 }
 
 .event-date{
@@ -586,13 +595,13 @@ section{
   background:rgba(222,176,90,0.1);
   border-radius:20px;
   margin-top:15px;
-  font-size:14px;
+  font-size:clamp(14px, 1.6vw, 16px);
 }
 
 /* ================= TELEGRAM BANNER ================= */
 .telegram-banner{
   background:linear-gradient(135deg, #0088cc, #005e8a);
-  padding:40px;
+  padding:clamp(30px, 4vw, 50px);
   border-radius:15px;
   text-align:center;
   margin:60px auto;
@@ -619,7 +628,7 @@ section{
 }
 
 .telegram-banner h3{
-  font-size:28px;
+  font-size:clamp(24px, 3vw, 32px);
   margin-bottom:15px;
   position:relative;
   z-index:2;
@@ -630,7 +639,7 @@ section{
   opacity:.9;
   position:relative;
   z-index:2;
-  font-size:16px;
+  font-size:clamp(16px, 1.8vw, 18px);
 }
 
 .telegram-banner a{
@@ -644,7 +653,7 @@ section{
   transition:all 0.3s ease;
   position:relative;
   z-index:2;
-  font-size:16px;
+  font-size:clamp(16px, 1.8vw, 18px);
 }
 
 .telegram-banner a:hover{
@@ -656,7 +665,7 @@ section{
 /* ================= CONTACT ================= */
 .contact-banner{
   background:linear-gradient(135deg,var(--main),#6b1414);
-  padding:50px;
+  padding:clamp(30px, 4vw, 50px);
   text-align:center;
   margin-bottom:60px;
   border-radius:15px;
@@ -676,14 +685,14 @@ section{
 }
 
 .contact-banner h3{
-  font-size:32px;
+  font-size:clamp(28px, 3.5vw, 36px);
   margin-bottom:15px;
   position:relative;
   z-index:2;
 }
 
 .contact-banner p{
-  font-size:18px;
+  font-size:clamp(16px, 2vw, 20px);
   opacity:.95;
   position:relative;
   z-index:2;
@@ -691,7 +700,7 @@ section{
 
 .form-box{
   background:rgba(30,30,30,0.7);
-  padding:40px;
+  padding:clamp(25px, 3vw, 40px);
   border-radius:15px;
   border:1px solid rgba(255,255,255,0.08);
   position:relative;
@@ -710,7 +719,7 @@ section{
 
 .contact-info{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:30px;
   margin-top:40px;
 }
@@ -733,6 +742,15 @@ section{
   font-size:32px;
   color:var(--main);
   margin-bottom:15px;
+}
+
+.contact-item h4{
+  font-size:clamp(18px, 2vw, 20px);
+  margin-bottom:10px;
+}
+
+.contact-item p, .contact-item a{
+  font-size:clamp(14px, 1.6vw, 16px);
 }
 
 .contact-item a{
@@ -778,16 +796,16 @@ footer{
   color:#aaa;
   text-decoration:none;
   transition:color 0.3s ease;
-  font-size:14px;
+  font-size:clamp(14px, 1.6vw, 16px);
 }
 
 .footer-links a:hover{
   color:var(--main);
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= RESPONSIVE DESIGN ================= */
 
-/* Tabletlar uchun (768px - 1024px) */
+/* Planshet (768px - 1024px) */
 @media (max-width: 1024px) {
   header{
     padding:0 4%;
@@ -801,81 +819,110 @@ footer{
     padding:0 4%;
   }
   
+  nav{
+    gap:20px;
+  }
+  
+  nav a{
+    font-size:14px;
+  }
+}
+
+/* Kichik planshet va katta telefonlar (576px - 768px) */
+@media (max-width: 768px) {
+  nav{
+    display:none;
+  }
+  
+  .mobile-menu-btn{
+    display:block;
+    margin-left:auto;
+  }
+  
+  .mobile-menu{
+    position:fixed;
+    top:70px;
+    left:0;
+    width:100%;
+    background:rgba(10,10,10,.98);
+    backdrop-filter:blur(15px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:20px 0;
+    gap:15px;
+    transform:translateY(-100%);
+    opacity:0;
+    transition:all 0.4s ease;
+    z-index:9998;
+    border-bottom:1px solid rgba(194,40,34,0.3);
+  }
+  
+  .mobile-menu.active{
+    transform:translateY(0);
+    opacity:1;
+  }
+  
+  .mobile-menu a{
+    color:#ddd;
+    text-decoration:none;
+    font-size:18px;
+    padding:12px 0;
+    width:100%;
+    text-align:center;
+    transition:all 0.3s ease;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+  }
+  
+  .mobile-menu a:hover{
+    color:var(--main);
+    background:rgba(194,40,34,0.1);
+  }
+  
+  .hero p{
+    padding:0 10px;
+  }
+  
   .about{
     grid-template-columns:1fr;
     gap:30px;
   }
   
-  .cards{
-    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  .cards, .events-container, .contact-info{
+    grid-template-columns:1fr;
   }
   
-  .events-container{
-    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  .team{
+    flex-direction:column;
+    align-items:center;
   }
   
-  .telegram-banner{
-    margin:40px auto;
-    padding:30px;
+  .member{
+    width:100%;
+    max-width:400px;
   }
 }
 
-/* Kichik planshetlar va katta telefonlar uchun (576px - 768px) */
-@media (max-width: 768px) {
-  .header-container{
-    padding:0 10px;
+/* Telefonlar (max-width: 576px) */
+@media (max-width: 576px) {
+  header{
+    padding:0 20px;
+    height:60px;
   }
   
-  nav{
-    position:fixed;
-    top:70px;
-    left:0;
-    width:100%;
-    background:rgba(10,10,10,0.98);
-    backdrop-filter:blur(15px);
-    flex-direction:column;
-    padding:20px;
-    gap:15px;
-    transform:translateY(-100%);
-    opacity:0;
-    visibility:hidden;
-    transition:all 0.4s ease;
-    z-index:999;
-    border-bottom:1px solid rgba(194,40,34,0.3);
+  .logo{
+    width:46px;
+    height:46px;
   }
   
-  nav.active{
-    transform:translateY(0);
-    opacity:1;
-    visibility:visible;
+  .hero{
+    margin-top:60px;
+    padding:0 20px;
+    min-height:calc(100vh - 60px);
   }
   
-  nav a{
-    font-size:16px;
-    padding:12px 0;
-    text-align:center;
-    width:100%;
-    border-bottom:1px solid rgba(255,255,255,0.05);
-  }
-  
-  nav a:last-child{
-    border-bottom:none;
-  }
-  
-  .menu-toggle{
-    display:flex;
-  }
-  
-  .menu-toggle.active span:nth-child(1){
-    transform:rotate(45deg) translate(7px, 7px);
-  }
-  
-  .menu-toggle.active span:nth-child(2){
-    opacity:0;
-  }
-  
-  .menu-toggle.active span:nth-child(3){
-    transform:rotate(-45deg) translate(7px, -7px);
+  section{
+    padding:60px 20px;
   }
   
   .hero h1{
@@ -883,185 +930,71 @@ footer{
   }
   
   .hero p{
-    font-size:clamp(16px, 3vw, 18px);
-    margin:20px auto 30px;
+    font-size:clamp(16px, 4vw, 18px);
+    margin:20px 0 40px;
   }
   
   .hero a{
-    padding:15px 30px;
+    padding:16px 35px;
     font-size:16px;
   }
   
   .section-title h2{
-    font-size:clamp(26px, 5vw, 32px);
+    font-size:clamp(28px, 6vw, 36px);
   }
   
-  .about, .cards, .events-container{
-    grid-template-columns:1fr;
-  }
-  
-  .about div, .card, .member{
+  .about div, .format-details, .form-box{
     padding:25px;
-  }
-  
-  .format-details{
-    padding:25px;
-  }
-  
-  .contact-banner{
-    padding:30px 20px;
-  }
-  
-  .form-box{
-    padding:25px;
-  }
-  
-  .telegram-banner h3{
-    font-size:24px;
-  }
-}
-
-/* Telefonlar uchun (576px gacha) */
-@media (max-width: 576px) {
-  header{
-    height:60px;
-    padding:0 15px;
-  }
-  
-  .logo{
-    width:45px;
-    height:45px;
-  }
-  
-  .hero{
-    min-height:90vh;
-    padding-top:60px;
-  }
-  
-  .hero-content{
-    padding:0 15px;
-  }
-  
-  .hero h1{
-    font-size:clamp(28px, 9vw, 36px);
-    margin-bottom:20px;
-  }
-  
-  .hero p{
-    font-size:16px;
-    line-height:1.6;
-    margin:15px auto 25px;
-  }
-  
-  .hero a{
-    padding:14px 28px;
-    font-size:15px;
-  }
-  
-  section{
-    padding:60px 15px;
-  }
-  
-  .section-title{
-    margin-bottom:40px;
-  }
-  
-  .section-title h2{
-    font-size:clamp(24px, 6vw, 28px);
-  }
-  
-  .about div, .card, .member, .format-details, .form-box{
-    padding:20px;
-  }
-  
-  .about h3, .card h4{
-    font-size:18px;
-  }
-  
-  .about p, .card p, .format-details p{
-    font-size:15px;
-  }
-  
-  .member{
-    width:100%;
-    max-width:300px;
-  }
-  
-  .member img{
-    width:120px;
-    height:120px;
-  }
-  
-  .event-card{
-    margin-bottom:20px;
   }
   
   .telegram-banner{
-    padding:25px 15px;
-    margin:30px auto;
-  }
-  
-  .telegram-banner h3{
-    font-size:20px;
-  }
-  
-  .telegram-banner p{
-    font-size:15px;
-  }
-  
-  .telegram-banner a{
-    padding:12px 25px;
-    font-size:15px;
+    margin:40px auto;
+    padding:25px 20px;
   }
   
   .contact-banner{
-    padding:25px 15px;
-    margin-bottom:40px;
+    padding:25px 20px;
   }
   
-  .contact-banner h3{
-    font-size:24px;
-  }
-  
-  .contact-banner p{
-    font-size:16px;
-  }
-  
-  .contact-info{
-    grid-template-columns:1fr;
-    gap:20px;
+  .footer-links{
+    gap:15px;
+    flex-direction:column;
   }
   
   iframe{
     height:500px;
   }
-  
-  .footer-links{
-    gap:15px;
-    margin:15px 0 20px;
-  }
-  
-  .footer-links a{
-    font-size:13px;
-  }
 }
 
-/* Kichik telefonlar uchun (400px gacha) */
-@media (max-width: 400px) {
+/* Juda kichik telefonlar (max-width: 380px) */
+@media (max-width: 380px) {
+  header{
+    padding:0 15px;
+  }
+  
+  .hero{
+    padding:0 15px;
+  }
+  
+  section{
+    padding:50px 15px;
+  }
+  
   .hero h1{
-    font-size:26px;
+    font-size:28px;
   }
   
   .hero p{
+    font-size:16px;
+  }
+  
+  .hero a{
+    padding:14px 25px;
     font-size:15px;
   }
   
-  .section-title h2{
-    font-size:22px;
-  }
-  
-  .cards, .events-container{
-    gap:20px;
+  .about div, .card, .member, .event-card, .contact-item{
+    padding:20px;
   }
   
   iframe{
@@ -1069,35 +1002,40 @@ footer{
   }
 }
 
-/* Landscape mode uchun */
-@media (max-height: 600px) and (orientation: landscape) {
-  .hero{
-    min-height:120vh;
-    padding-top:80px;
+/* Juda katta ekranlar (min-width: 1600px) */
+@media (min-width: 1600px) {
+  .container{
+    max-width:1400px;
+    margin:0 auto;
   }
   
-  nav.active{
-    height:auto;
-    max-height:80vh;
-    overflow-y:auto;
-  }
-}
-
-/* Yuqori resolution ekranlar uchun */
-@media (min-width: 1920px) {
-  .header-container, .hero-content, section{
-    max-width:1600px;
-    margin-left:auto;
-    margin-right:auto;
+  .hero-content{
+    max-width:1000px;
   }
   
   .hero h1{
-    font-size:clamp(42px, 5vw, 80px);
+    font-size:80px;
   }
   
   .hero p{
-    font-size:clamp(20px, 1.5vw, 26px);
-    max-width:900px;
+    font-size:26px;
+  }
+}
+
+/* Landscape (gorizontal) rejim */
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero{
+    min-height:calc(100vh - 70px);
+    padding:40px 6%;
+  }
+  
+  .hero h1{
+    font-size:clamp(32px, 5vw, 48px);
+  }
+  
+  .hero p{
+    margin:15px 0 30px;
+    font-size:clamp(16px, 2vw, 20px);
   }
 }
 </style>
@@ -1106,27 +1044,35 @@ footer{
 <body>
 
 <header>
-  <div class="header-container">
-    <div class="logo">
-      <img src="loyiha.jpg" alt="MIS Logo">
-    </div>
-    
-    <button class="menu-toggle" id="menuToggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    
-    <nav id="mainNav">
-      <a href="#home">Bosh Sahifa</a>
-      <a href="#about">Loyiha Haqida</a>
-      <a href="#format">Format</a>
-      <a href="#team">Jamoa</a>
-      <a href="#events">Tadbirlar</a>
-      <a href="#contact">Aloqa</a>
-    </nav>
+  <div class="logo">
+    <img src="loyiha.jpg" alt="MIS Logo">
   </div>
+  
+  <!-- Desktop navigatsiya -->
+  <nav id="desktopNav">
+    <a href="#home">Bosh Sahifa</a>
+    <a href="#about">Loyiha Haqida</a>
+    <a href="#format">Format</a>
+    <a href="#team">Jamoa</a>
+    <a href="#events">Tadbirlar</a>
+    <a href="#contact">Aloqa</a>
+  </nav>
+  
+  <!-- Mobil menyu tugmasi -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <i class="fas fa-bars"></i>
+  </button>
 </header>
+
+<!-- Mobil menyu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Bosh Sahifa</a>
+  <a href="#about">Loyiha Haqida</a>
+  <a href="#format">Format</a>
+  <a href="#team">Jamoa</a>
+  <a href="#events">Tadbirlar</a>
+  <a href="#contact">Aloqa</a>
+</div>
 
 <section class="hero" id="home">
   <div class="hero-content">
@@ -1295,63 +1241,74 @@ footer{
 
 <script>
 // Mobil menyu boshqaruvi
-const menuToggle = document.getElementById('menuToggle');
-const mainNav = document.getElementById('mainNav');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
 
-menuToggle.addEventListener('click', function() {
-  this.classList.toggle('active');
-  mainNav.classList.toggle('active');
-  
-  // Menyu ochiq bo'lsa, body scroll ni o'chirish
-  if(mainNav.classList.contains('active')) {
-    document.body.style.overflow = 'hidden';
+mobileMenuBtn.addEventListener('click', function() {
+  mobileMenu.classList.toggle('active');
+  // Tugma ikonkasini o'zgartirish
+  const icon = this.querySelector('i');
+  if (mobileMenu.classList.contains('active')) {
+    icon.classList.remove('fa-bars');
+    icon.classList.add('fa-times');
   } else {
-    document.body.style.overflow = 'auto';
+    icon.classList.remove('fa-times');
+    icon.classList.add('fa-bars');
   }
 });
 
-// Menyu elementlariga bosilganda menyuni yopish (mobil uchun)
-const navLinks = document.querySelectorAll('nav a');
-navLinks.forEach(link => {
+// Mobil menyuni yopish
+document.addEventListener('click', function(event) {
+  if (!event.target.closest('.mobile-menu') && !event.target.closest('.mobile-menu-btn')) {
+    mobileMenu.classList.remove('active');
+    const icon = mobileMenuBtn.querySelector('i');
+    icon.classList.remove('fa-times');
+    icon.classList.add('fa-bars');
+  }
+});
+
+// Mobil menyu havolalari bosilganda menyuni yopish
+const mobileLinks = mobileMenu.querySelectorAll('a');
+mobileLinks.forEach(link => {
   link.addEventListener('click', function() {
-    if(window.innerWidth <= 768) {
-      menuToggle.classList.remove('active');
-      mainNav.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
+    mobileMenu.classList.remove('active');
+    const icon = mobileMenuBtn.querySelector('i');
+    icon.classList.remove('fa-times');
+    icon.classList.add('fa-bars');
   });
 });
 
-// Ekran o'lchami o'zgarganda menyuni qayta sozlash
-window.addEventListener('resize', function() {
-  if(window.innerWidth > 768) {
-    menuToggle.classList.remove('active');
-    mainNav.classList.remove('active');
-    document.body.style.overflow = 'auto';
+// Scroll animatsiyasi
+window.addEventListener('scroll', function() {
+  const header = document.querySelector('header');
+  if (window.scrollY > 50) {
+    header.style.background = 'rgba(10,10,10,0.98)';
+    header.style.backdropFilter = 'blur(15px)';
+  } else {
+    header.style.background = 'rgba(10,10,10,0.95)';
+    header.style.backdropFilter = 'blur(12px)';
   }
 });
 
-// Scroll animatsiyalari
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
+// Smooth scroll barcha havolalar uchun
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      const headerHeight = document.querySelector('header').offsetHeight;
+      const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
     }
   });
-}, observerOptions);
-
-// Elementlarni kuzatish
-document.querySelectorAll('section, .card, .member, .event-card').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  observer.observe(el);
 });
 </script>
 
